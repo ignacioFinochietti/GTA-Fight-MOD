@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Live Vertical Overlay (9:16) - GTA V</title>
+    <link rel="stylesheet" href="youtube_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="vertical-container">
+        <!-- CABECERA DE YOUTUBE LIVE -->
+        <header class="top-hud">
+            <div class="yt-header-row">
+                <div class="yt-live-badge"><span class="pulse-dot"></span> 🔴 YOUTUBE LIVE</div>
+                <h1 class="last-standing-title">LAST STANDING</h1>
+                <a href="/admin.html" target="_blank" class="admin-panel-btn">⚙️ Control</a>
+            </div>
+
+            <div class="last-standing-username">★ <span id="top-user-name">@StreamerYT</span> ★</div>
+            <div class="time-survived">Tiempo en Vivo: <span id="timer-display">00:00</span></div>
+            
+            <!-- BARRA DE DUELO VS -->
+            <div class="vs-bar-container">
+                <span class="user-left" id="user-left-name">Luchador 1</span>
+                <div class="vs-bar-wrapper">
+                    <div class="vs-fill left-fill" id="left-fill" style="width: 50%;"></div>
+                    <div class="vs-badge">VS</div>
+                    <div class="vs-fill right-fill" id="right-fill" style="width: 50%;"></div>
+                </div>
+                <span class="user-right" id="user-right-name">Luchador 2</span>
+            </div>
+        </header>
+
+        <!-- CENTRO TRANSPARENTE PARA GTA V -->
+        <main class="game-viewport-916"></main>
+
+        <!-- BLOQUE INFERIOR: TOP SUPERCHATS & ACTIVIDAD -->
+        <footer class="bottom-block">
+            <div class="scores-layout">
+                <!-- TOP SUPERCHATS / DONADORES -->
+                <div class="score-card">
+                    <div class="score-title">🏆 Top SuperChats</div>
+                    <ol class="score-list" id="daily-score-list">
+                        <li class="empty-msg">Envía un SuperChat o Únete...</li>
+                    </ol>
+                </div>
+
+                <!-- FEED DE SUPER CHATS RECIENTES -->
+                <div class="score-card">
+                    <div class="score-title">⚡ Feed de SuperChats</div>
+                    <div class="gift-feed" id="gift-feed">
+                        <!-- Feed en tiempo real -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATÁLOGOS DE SUPER CHATS DE YOUTUBE (PRECIOS REDUCIDOS 50%) -->
+            <div class="yt-superchat-grid">
+                <div class="yt-tile tile-blue"><span class="sc-badge">💵 $1</span><span class="sc-lbl">SWAT</span></div>
+                <div class="yt-tile tile-yellow"><span class="sc-badge">🚀 $2.5</span><span class="sc-lbl">Cohete</span></div>
+                <div class="yt-tile tile-orange"><span class="sc-badge">🎩 $5</span><span class="sc-lbl">Sniper</span></div>
+                <div class="yt-tile tile-pink"><span class="sc-badge">💖 $10</span><span class="sc-lbl">Ninja</span></div>
+                <div class="yt-tile tile-purple"><span class="sc-badge">🦁 $25</span><span class="sc-lbl">Boss Bob</span></div>
+                <div class="yt-tile tile-red"><span class="sc-badge">🌌 $50</span><span class="sc-lbl">Universo</span></div>
+                <div class="yt-tile tile-member"><span class="sc-badge">👆 10 Likes</span><span class="sc-lbl">Bateador</span></div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

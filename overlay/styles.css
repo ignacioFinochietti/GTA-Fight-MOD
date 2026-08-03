@@ -1,0 +1,348 @@
+:root {
+    --bg-glass: rgba(10, 14, 26, 0.86);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --neon-pink: #ff007f;
+    --neon-blue: #00f0ff;
+    --neon-green: #39ff14;
+    --neon-yellow: #ffea00;
+    --neon-purple: #b500ff;
+    --gold: #ffb703;
+    --text-main: #ffffff;
+    --text-muted: #a0aab8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+    color: var(--text-main);
+}
+
+#vertical-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    justify-content: space-between;
+}
+
+.glass-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* ARRIBA: HEADER ADAPTABLE 100% ANCHO DE OBS */
+.stream-header {
+    width: 100%;
+    padding: 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-top-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.live-badge {
+    background: #ff003c;
+    color: #fff;
+    font-weight: 900;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 1px;
+    box-shadow: 0 0 16px rgba(255, 0, 60, 0.6);
+}
+
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    animation: pulse 1.2s infinite;
+}
+
+.last-standing-title {
+    font-family: 'Press Start 2P', cursive, sans-serif;
+    font-size: 28px;
+    color: #ffea00;
+    text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000;
+    letter-spacing: 2px;
+}
+
+.toggle-dev-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.toggle-dev-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.last-standing-username {
+    font-size: 32px;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 234, 0, 0.8), 2px 2px 0 #000;
+}
+
+/* DUELO VS BAR */
+.vs-bar-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.user-left { font-size: 18px; font-weight: 900; color: #00f0ff; text-shadow: 1px 1px 0 #000; min-width: 120px; text-align: right; }
+.user-right { font-size: 18px; font-weight: 900; color: #ff007f; text-shadow: 1px 1px 0 #000; min-width: 120px; text-align: left; }
+
+.vs-bar-wrapper {
+    flex: 1;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.vs-fill.left-fill { background: #00f0ff; box-shadow: 0 0 12px #00f0ff; }
+.vs-fill.right-fill { background: #ff007f; box-shadow: 0 0 12px #ff007f; }
+
+.vs-badge {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffea00;
+    color: #000;
+    font-weight: 900;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.scroll-ticker {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.ticker-item {
+    font-size: 14px;
+    font-weight: 700;
+    color: #d1d5db;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 7px 16px;
+    border-radius: 10px;
+}
+
+/* CENTRO: ESPACIO LIBRE TRANSPARENTE */
+.game-viewport-middle {
+    flex: 1;
+    background: transparent;
+}
+
+/* ABAJO: BLOQUE INFERIOR FIX */
+.bottom-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.scores-layout-row {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+}
+
+.score-panel {
+    flex: 1;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 180px;
+    max-height: 250px;
+    overflow: hidden;
+}
+
+.panel-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--gold);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    padding-bottom: 6px;
+}
+
+.score-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.score-list li {
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+}
+
+.empty-msg {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 12px 0;
+}
+
+.gift-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+}
+
+.feed-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    background: rgba(255, 0, 127, 0.15);
+    border: 1px solid var(--neon-pink);
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.feed-item .icon { font-size: 18px; }
+.feed-item .user { font-weight: 800; }
+
+/* CATALOGO DE REGALOS 9 CASILLAS ADAPTABLE */
+.gift-catalog-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 8px;
+}
+
+.gift-tile {
+    background: rgba(10, 14, 26, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    padding: 16px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.gift-tile .gift-icon { font-size: 30px; }
+.gift-tile .gift-lbl { font-size: 12px; font-weight: 800; color: #fff; text-align: center; }
+
+/* BOTONERA TESTER FLOTANTE */
+.control-footer-vertical {
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.control-tools-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.input-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.input-item input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+}
+
+.button-grid-9-vertical {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 8px;
+}
+
+.btn {
+    padding: 12px 4px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+    transition: transform 0.1s ease, background 0.15s ease;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.btn-rose { background: #ff0055; }
+.btn-ice { background: #00b4d8; color: #000; }
+.btn-donut { background: #39ff14; color: #000; }
+.btn-rocket { background: #ffea00; color: #000; }
+.btn-hat { background: #ff6600; }
+.btn-heart { background: #ff007f; }
+.btn-lion { background: #9d4edd; }
+.btn-universe { background: linear-gradient(135deg, #b500ff, #ff007f); }
+.btn-taps { background: #00f0ff; color: #000; }
+.btn-walls { background: #ffea00; color: #000; font-weight: 900; padding: 3px 6px; }
+
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}

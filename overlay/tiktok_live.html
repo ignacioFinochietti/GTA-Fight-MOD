@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Live Vertical Overlay (9:16)</title>
+    <link rel="stylesheet" href="tiktok_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="vertical-container">
+        <!-- TOP HUD: LAST STANDING BANNER -->
+        <div class="top-hud">
+            <h1 class="last-standing-title">Last Standing</h1>
+            <div class="last-standing-username">★ <span id="top-user-name">KevingRanados75</span> ★</div>
+            <div class="time-survived">Time Survived : <span id="timer-display">00:57</span></div>
+            
+            <!-- DUEL VS BAR -->
+            <div class="vs-bar-container">
+                <span class="user-left" id="user-left-name">kevingranados75</span>
+                <div class="vs-bar-wrapper">
+                    <div class="vs-fill left-fill" id="left-fill" style="width: 50%;"></div>
+                    <div class="vs-badge">VS</div>
+                    <div class="vs-fill right-fill" id="right-fill" style="width: 50%;"></div>
+                </div>
+                <span class="user-right" id="user-right-name">eresssssss_s</span>
+            </div>
+        </div>
+
+        <!-- TRANSPARENT GAMEPLAY VIEWPORT -->
+        <div class="game-viewport-916"></div>
+
+        <!-- BOTTOM SCOREBOARDS (DAILY SCORE & WEEKLY SCORE) -->
+        <div class="scores-layout">
+            <!-- DAILY SCORE -->
+            <div class="score-card daily-card">
+                <div class="score-title">Daily Score :</div>
+                <ol class="score-list" id="daily-score-list">
+                    <li><span class="uname">1. mt_2sick</span> <span class="pts">[906]</span></li>
+                    <li><span class="uname">2. kerry_df</span> <span class="pts">[350]</span></li>
+                    <li><span class="uname">3. 5.0anthonyyy</span> <span class="pts">[317]</span></li>
+                    <li><span class="uname">4. anghellrocker</span> <span class="pts">[310]</span></li>
+                    <li><span class="uname">5. brunonunes2511</span> <span class="pts">[206]</span></li>
+                </ol>
+            </div>
+
+            <!-- WEEKLY SCORE -->
+            <div class="score-card weekly-card">
+                <div class="score-title">Weekly Score :</div>
+                <ol class="score-list" id="weekly-score-list">
+                    <li><span class="uname">1. bl00dykiwis</span> <span class="pts">[1418]</span></li>
+                    <li><span class="uname">2. someoneuused2kno</span> <span class="pts">[1158]</span></li>
+                    <li><span class="uname">3. phubet.jack</span> <span class="pts">[964]</span></li>
+                    <li><span class="uname">4. dessy.monster</span> <span class="pts">[940]</span></li>
+                    <li><span class="uname">5. mt_2sick</span> <span class="pts">[906]</span></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- BOTTOM GIFTS CARDS CATALOG FOR VIEWERS -->
+        <div class="gift-catalog-grid">
+            <div class="gift-tile"><span class="gift-badge">🌹</span><span class="gift-lbl">Rosa</span></div>
+            <div class="gift-tile"><span class="gift-badge">🍦</span><span class="gift-lbl">Helado</span></div>
+            <div class="gift-tile"><span class="gift-badge">🍩</span><span class="gift-lbl">Dona</span></div>
+            <div class="gift-tile"><span class="gift-badge">🚀</span><span class="gift-lbl">Cohete</span></div>
+            <div class="gift-tile"><span class="gift-badge">🎩</span><span class="gift-lbl">Sombrero</span></div>
+            <div class="gift-tile"><span class="gift-badge">💖</span><span class="gift-lbl">Corazón</span></div>
+            <div class="gift-tile"><span class="gift-badge">🦁</span><span class="gift-lbl">León</span></div>
+            <div class="gift-tile"><span class="gift-badge">🌌</span><span class="gift-lbl">Universo</span></div>
+            <div class="gift-tile"><span class="gift-badge">👆</span><span class="gift-lbl">10 Taps</span></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

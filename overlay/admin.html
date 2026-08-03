@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel - Stream To Earn (TikTok & YouTube Live)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --card-glass: rgba(18, 26, 44, 0.85);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --yt-red: #ff0000;
+            --tt-cyan: #00f0ff;
+            --tt-pink: #ff007f;
+            --gold: #ffea00;
+            --text: #ffffff;
+            --text-sub: #a0aab8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+        body { background: var(--bg-dark); color: var(--text); padding: 24px; min-height: 100vh; }
+
+        .dashboard-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+        
+        header {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+        }
+
+        .logo-title { font-family: 'Press Start 2P', cursive; font-size: 20px; color: var(--gold); }
+        .subtitle { font-size: 14px; color: var(--text-sub); margin-top: 4px; }
+
+        .status-pills { display: flex; gap: 12px; }
+        .status-badge {
+            font-size: 12px; font-weight: 800; padding: 8px 14px; border-radius: 20px;
+            display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+        }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff3333; }
+        .status-dot.active { background: #39ff14; box-shadow: 0 0 10px #39ff14; }
+
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+        .card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            backdrop-filter: blur(12px);
+        }
+
+        .card-title { font-size: 18px; font-weight: 900; color: var(--gold); border-bottom: 1px solid var(--border-glass); padding-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        label { font-size: 13px; font-weight: 800; color: var(--text-sub); }
+        
+        input, select {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            outline: none;
+        }
+
+        input:focus, select:focus { border-color: var(--tt-cyan); }
+
+        .row-group { display: flex; gap: 12px; align-items: center; }
+
+        .btn {
+            background: linear-gradient(135deg, #00f0ff, #7000ff);
+            color: #fff; border: none; padding: 12px 20px; border-radius: 10px;
+            font-weight: 800; font-size: 14px; cursor: pointer; transition: 0.2s ease;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        .btn-yt { background: linear-gradient(135deg, #ff0000, #b30000); }
+        .btn-tt { background: linear-gradient(135deg, #00f0ff, #ff007f); }
+        .btn-action { background: rgba(255, 255, 255, 0.12); border: 1px solid var(--border-glass); }
+
+        .tester-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .tester-btn {
+            padding: 12px 8px; border-radius: 8px; border: none; font-size: 12px; font-weight: 800;
+            color: #fff; cursor: pointer; transition: 0.15s ease; text-align: center;
+        }
+        .tester-btn:hover { transform: scale(1.05); }
+
+        .links-row { display: flex; gap: 12px; margin-top: 10px; }
+        .link-btn { text-decoration: none; padding: 10px 16px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); color: #fff; font-weight: 800; font-size: 13px; border: 1px solid var(--border-glass); text-align: center; flex: 1; }
+        .link-btn:hover { background: rgba(255, 255, 255, 0.18); }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <div>
+                <div class="logo-title">STREAM TO EARN</div>
+                <div class="subtitle">Panel de Control & Configuración (TikTok Live GTA V)</div>
+            </div>
+            <div class="status-pills">
+                <div class="status-badge"><span class="status-dot" id="tt-dot"></span> TikTok: <span id="tt-status">Conectando...</span></div>
+            </div>
+        </header>
+
+        <div class="links-row">
+            <a href="http://localhost:3000/index.html" target="_blank" class="link-btn">📺 Abrir Overlay TikTok / OBS (http://localhost:3000)</a>
+            <a href="http://localhost:3000/tiktok_live.html" target="_blank" class="link-btn">📱 Abrir Overlay TikTok Vertical 9:16</a>
+        </div>
+
+        <div class="main-grid">
+            <!-- CONFIGURACIÓN DE TIKTOK -->
+            <div class="card">
+                <div class="card-title">📡 Conexión TikTok Live</div>
+
+                <div class="form-group">
+                    <label>Usuario TikTok Live:</label>
+                    <div class="row-group">
+                        <input type="text" id="tt-username" value="tu_usuario_tiktok" style="flex:1;">
+                        <button class="btn btn-tt" onclick="reconnectTikTok()">Reconectar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARÁMETROS DEL JUEGO Y ARENA -->
+            <div class="card">
+                <div class="card-title">⚙️ Parámetros de GTA V & Arena</div>
+
+                <div class="form-group">
+                    <label>Límite Máximo de Peds por Usuario: <span id="ped-cap-val" style="color:var(--gold);">6</span></label>
+                    <input type="range" id="ped-cap-range" min="1" max="20" value="6" oninput="updatePedCapVal(this.value)" onchange="savePedCap(this.value)">
+                </div>
+
+                <div class="form-group">
+                    <label>Paredes de Arena en GTA V:</label>
+                    <div class="row-group">
+                        <button class="btn btn-action" id="walls-btn" onclick="toggleWalls()" style="width: 100%;">🧱 Alternar Visibilidad de Paredes</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Simular Usuario Donador:</label>
+                    <input type="text" id="donor-input" value="@TikTokFan" placeholder="@usuario">
+                </div>
+            </div>
+
+            <!-- SIMULADOR Y TESTER TIKTOK GIFTS -->
+            <div class="card" style="grid-column: span 2;">
+                <div class="card-title">🎵 Pruebas TikTok Live</div>
+                <div class="tester-grid">
+                    <button class="tester-btn" style="background:#ff0055;" onclick="triggerTT('Rose')">🌹 Rosa</button>
+                    <button class="tester-btn" style="background:#00b4d8; color:#000;" onclick="triggerTT('Ice Cream')">🍦 Helado</button>
+                    <button class="tester-btn" style="background:#39ff14; color:#000;" onclick="triggerTT('Donut')">🍩 Dona</button>
+                    <button class="tester-btn" style="background:#ffea00; color:#000;" onclick="triggerTT('Rocket')">🚀 Cohete</button>
+                    <button class="tester-btn" style="background:#ff6600;" onclick="triggerTT('Hat')">🎩 Sombrero</button>
+                    <button class="tester-btn" style="background:#ff007f;" onclick="triggerTT('Heart')">💖 Corazón</button>
+                    <button class="tester-btn" style="background:#9d4edd;" onclick="triggerTT('Lion')">🦁 León</button>
+                    <button class="tester-btn" style="background:linear-gradient(135deg, #b500ff, #ff007f);" onclick="triggerTT('Universe')">🌌 Universo</button>
+                    <button class="tester-btn" style="background:#00f0ff; color:#000;" onclick="triggerTaps()">👆 10 Taps</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isWallsVisible = true;
+        const API_BASE = window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:3000';
+
+        function updatePedCapVal(val) {
+            document.getElementById('ped-cap-val').innerText = val;
+        }
+
+        function savePedCap(val) {
+            fetch(`${API_BASE}/api/set-ped-cap?limit=${val}`);
+        }
+
+        function toggleWalls() {
+            isWallsVisible = !isWallsVisible;
+            fetch(`${API_BASE}/api/toggle-walls?visible=${isWallsVisible}`);
+        }
+
+        function triggerTT(giftName) {
+            const donor = document.getElementById('donor-input').value || '@TikTokFan';
+            fetch(`${API_BASE}/api/test-gift?gift=${encodeURIComponent(giftName)}&donor=${encodeURIComponent(donor)}`);
+        }
+
+        function triggerTaps() {
+            const donor = document.getElementById('donor-input').value || '@Tapper';
+            fetch(`${API_BASE}/api/tap?donor=${encodeURIComponent(donor)}`);
+        }
+
+        function reconnectTikTok() {
+            const user = document.getElementById('tt-username').value;
+            fetch(`${API_BASE}/api/config`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tiktokUsername: user })
+            });
+        }
+
+        async function checkServerStatus() {
+            try {
+                const res = await fetch(`${API_BASE}/api/config`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const ttDot = document.getElementById('tt-dot');
+                    const ttStatus = document.getElementById('tt-status');
+                    if (data.isTikTokConnected) {
+                        ttDot.classList.add('active');
+                        ttStatus.innerText = `Conectado (@${data.tiktokUsername})`;
+                    } else {
+                        ttDot.classList.remove('active');
+                        ttStatus.innerText = `Buscando En Vivo (@${data.tiktokUsername})...`;
+                    }
+                }
+            } catch (e) {
+                const ttDot = document.getElementById('tt-dot');
+                const ttStatus = document.getElementById('tt-status');
+                ttDot.classList.remove('active');
+                ttStatus.innerText = 'Servidor Desconectado';
+            }
+        }
+
+        setInterval(checkServerStatus, 3000);
+        checkServerStatus();
+    </script>
+</body>
+</html>

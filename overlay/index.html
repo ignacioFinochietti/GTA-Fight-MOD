@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Live Vertical Overlay (Top & Bottom Split)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="vertical-container">
+        <!-- ARRIBA: BARRA SUPERIOR (HEADER FIX) -->
+        <header class="glass-card stream-header">
+            <div class="header-top-row">
+                <div class="live-badge"><span class="pulse-dot"></span> EN VIVO</div>
+                <h1 class="last-standing-title">LAST STANDING</h1>
+                <button class="toggle-dev-btn" onclick="toggleDevTools()">👁️ Tester</button>
+            </div>
+
+            <div class="last-standing-username">★ <span id="top-user-name">@tu_usuario_tiktok</span> ★</div>
+            
+            <!-- BARRA DE DUELO VS -->
+            <div class="vs-bar-container">
+                <span class="user-left" id="user-left-name">Luchador 1</span>
+                <div class="vs-bar-wrapper">
+                    <div class="vs-fill left-fill" id="left-fill" style="width: 50%;"></div>
+                    <div class="vs-badge">VS</div>
+                    <div class="vs-fill right-fill" id="right-fill" style="width: 50%;"></div>
+                </div>
+                <span class="user-right" id="user-right-name">Luchador 2</span>
+            </div>
+
+            <div class="scroll-ticker">
+                <span class="ticker-item">🌹 Rosa (MicroSMG)</span>
+                <span class="ticker-item">🍦 Helado (SWAT)</span>
+                <span class="ticker-item">🍩 Dona (Alien)</span>
+                <span class="ticker-item">🚀 Cohete (Minigun)</span>
+                <span class="ticker-item">🎩 Sombrero (Sniper)</span>
+                <span class="ticker-item">💖 Corazón (Ninja)</span>
+                <span class="ticker-item">🦁 León (Boss Alien 1000HP)</span>
+                <span class="ticker-item">🌌 Universo (Contenedor)</span>
+                <span class="ticker-item">👆 10 Taps (Bateador)</span>
+            </div>
+        </header>
+
+        <!-- CENTRO: ESPACIO 100% TRANSPARENTE PARA GTA V -->
+        <main class="game-viewport-middle"></main>
+
+        <!-- ABAJO: BLOQUE INFERIOR (TABLAS + REGALOS + TESTER) -->
+        <footer class="bottom-block">
+            <!-- TABLAS DE PUNTAJE Y ACTIVIDAD -->
+            <div class="scores-layout-row">
+                <div class="glass-card score-panel">
+                    <div class="panel-title">🏆 Top Donadores</div>
+                    <ol class="score-list" id="daily-score-list">
+                        <li class="empty-msg">Envía un regalo...</li>
+                    </ol>
+                </div>
+
+                <div class="glass-card score-panel">
+                    <div class="panel-title">⚡ Actividad Reciente</div>
+                    <div class="gift-feed" id="gift-feed">
+                        <!-- Feed de eventos -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATÁLOGO DE REGALOS -->
+            <div class="gift-catalog-grid">
+                <div class="gift-tile"><span class="gift-icon">🌹</span><span class="gift-lbl">Rosa</span></div>
+                <div class="gift-tile"><span class="gift-icon">🍦</span><span class="gift-lbl">Helado</span></div>
+                <div class="gift-tile"><span class="gift-icon">🍩</span><span class="gift-lbl">Dona</span></div>
+                <div class="gift-tile"><span class="gift-icon">🚀</span><span class="gift-lbl">Cohete</span></div>
+                <div class="gift-tile"><span class="gift-icon">🎩</span><span class="gift-lbl">Sombrero</span></div>
+                <div class="gift-tile"><span class="gift-icon">💖</span><span class="gift-lbl">Corazón</span></div>
+                <div class="gift-tile"><span class="gift-icon">🦁</span><span class="gift-lbl">León</span></div>
+                <div class="gift-tile"><span class="gift-icon">🌌</span><span class="gift-lbl">Universo</span></div>
+                <div class="gift-tile"><span class="gift-icon">👆</span><span class="gift-lbl">10 Taps</span></div>
+            </div>
+
+            <!-- BOTONERA TESTER FLOTANTE (OCULTABLE) -->
+            <div class="glass-card control-footer-vertical" id="dev-tester-panel">
+                <div class="control-tools-row">
+                    <div class="input-item">
+                        <label>Espectador:</label>
+                        <input type="text" id="test-donor-input" value="@TikTokFan" placeholder="@usuario">
+                    </div>
+
+                    <div class="input-item">
+                        <label>Máx Peds:</label>
+                        <input type="number" id="ped-cap-input" value="6" min="1" max="20" style="width: 55px;" onchange="updatePedCap()">
+                    </div>
+
+                    <button class="btn btn-walls" onclick="toggleWalls()">🧱 Barreras</button>
+                </div>
+
+                <div class="button-grid-9-vertical">
+                    <button class="btn btn-rose" onclick="triggerGift('Rose')">🌹 Rosa</button>
+                    <button class="btn btn-ice" onclick="triggerGift('Ice Cream')">🍦 Helado</button>
+                    <button class="btn btn-donut" onclick="triggerGift('Donut')">🍩 Dona</button>
+                    <button class="btn btn-rocket" onclick="triggerGift('Rocket')">🚀 Cohete</button>
+                    <button class="btn btn-hat" onclick="triggerGift('Hat')">🎩 Sombrero</button>
+                    <button class="btn btn-heart" onclick="triggerGift('Heart')">💖 Corazón</button>
+                    <button class="btn btn-lion" onclick="triggerGift('Lion')">🦁 León</button>
+                    <button class="btn btn-universe" onclick="triggerGift('Universe')">🌌 Universo</button>
+                    <button class="btn btn-taps" onclick="triggerTaps()">👆 10 Taps</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        let isWallsVisible = true;
+        let isDevToolsVisible = true;
+        const API_BASE = window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:3000';
+
+        function triggerGift(giftName) {
+            const donor = document.getElementById('test-donor-input').value || '@User';
+            fetch(`${API_BASE}/api/test-gift?gift=${encodeURIComponent(giftName)}&donor=${encodeURIComponent(donor)}`);
+        }
+
+        function triggerTaps() {
+            const donor = document.getElementById('test-donor-input').value || '@User';
+            fetch(`${API_BASE}/api/tap?donor=${encodeURIComponent(donor)}`);
+        }
+
+        function toggleWalls() {
+            isWallsVisible = !isWallsVisible;
+            fetch(`${API_BASE}/api/toggle-walls?visible=${isWallsVisible}`);
+        }
+
+        function updatePedCap() {
+            const limit = document.getElementById('ped-cap-input').value || 6;
+            fetch(`${API_BASE}/api/set-ped-cap?limit=${limit}`);
+        }
+
+        function toggleDevTools() {
+            isDevToolsVisible = !isDevToolsVisible;
+            const panel = document.getElementById('dev-tester-panel');
+            const btn = document.querySelector('.toggle-dev-btn');
+            
+            if (isDevToolsVisible) {
+                panel.style.display = 'flex';
+                btn.innerText = '👁️ Tester';
+            } else {
+                panel.style.display = 'none';
+                btn.innerText = '👁️ Mostrar';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "gta5-tiktok-stream-server",
+  "version": "1.0.0",
+  "description": "Servidor Node.js para conectar TikTok Live con GTA V NPC Battles y OBS Overlay",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "tiktok-live-connector": "^2.4.3",
+    "ws": "^8.17.0"
+  }
+}
