@@ -127,7 +127,7 @@
                 <div class="form-group">
                     <label>Usuario TikTok Live:</label>
                     <div class="row-group">
-                        <input type="text" id="tt-username" value="ppv665" style="flex:1;">
+                        <input type="text" id="tt-username" value="tu_usuario_tiktok" placeholder="ej: tu_usuario_tiktok" style="flex:1;">
                         <button class="btn btn-tt" onclick="reconnectTikTok()">Reconectar</button>
                     </div>
                 </div>
@@ -202,6 +202,7 @@
 
         function reconnectTikTok() {
             const user = document.getElementById('tt-username').value;
+            if (user) localStorage.setItem('tiktok_username', user);
             fetch(`${API_BASE}/api/config`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -230,6 +231,11 @@
                 ttDot.classList.remove('active');
                 ttStatus.innerText = 'Servidor Desconectado';
             }
+        }
+
+        const savedUser = localStorage.getItem('tiktok_username');
+        if (savedUser) {
+            document.getElementById('tt-username').value = savedUser;
         }
 
         setInterval(checkServerStatus, 3000);

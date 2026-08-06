@@ -12,12 +12,25 @@ app.use(express.static('overlay'));
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const fs = require('fs');
+const path = require('path');
+
+// Cargar .env local si existe (ignorado por Git para no exponer datos privados)
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split(/\r?\n/).forEach(line => {
+        const [k, v] = line.split('=');
+        if (k && v) process.env[k.trim()] = v.trim();
+    });
+}
+
 let pendingEvents = [];
 let leaderboard = {};
 let maxPedsCap = 7;
 let wallsVisible = true;
 
-let TIKTOK_USERNAME = process.env.TIKTOK_USERNAME || 'ppv665';
+let TIKTOK_USERNAME = process.env.TIKTOK_USERNAME || 'tu_usuario_tiktok';
 let isTikTokConnected = false;
 let tiktokLiveConnection = null;
 
