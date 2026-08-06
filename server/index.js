@@ -121,32 +121,44 @@ function extractUsername(data) {
         broadcast({ type: 'LEADERBOARD_UPDATE', data: getSortedLeaderboard() });
     });
 
-    let likeCountTracker = {};
+    // EVENETO TAPS (LIKES): 1 TAP = 1 LUCHADOR INSTANTÁNEO
     tiktokLiveConnection.on('like', data => {
         const donor = extractUsername(data);
-        const likesReceived = data.likeCount || 1;
-        likeCountTracker[donor] = (likeCountTracker[donor] || 0) + likesReceived;
+        const likesReceived = Math.max(1, data.likeCount || 1);
 
-        console.log(`[TAPS EN VIVO] ${donor} dio ${likesReceived} taps (Acumulado: ${likeCountTracker[donor]}/2)`);
+        console.log(`[TAPS EN VIVO] ${donor} envió ${likesReceived} tap(s) -> Spawneando ${likesReceived} Bateador(es)`);
 
-        if (likeCountTracker[donor] >= 2) {
-            const spawns = Math.floor(likeCountTracker[donor] / 2);
-            likeCountTracker[donor] %= 2;
-
-            for (let i = 0; i < spawns; i++) {
-                pendingEvents.push({
-                    team: donor,
-                    unitType: 'brawler',
-                    weapon: 'BAT',
-                    donor: donor,
-                    timestamp: Date.now()
-                });
-            }
-
-            leaderboard[donor] = (leaderboard[donor] || 0) + spawns;
-            broadcast({ type: 'GIFT_RECEIVED', donor, giftName: 'Bate de Béisbol (2 Taps)', team: donor, count: spawns });
-            broadcast({ type: 'LEADERBOARD_UPDATE', data: getSortedLeaderboard() });
+        for (let i = 0; i < likesReceived; i++) {
+            pendingEvents.push({
+                team: donor,
+                unitType: 'brawler',
+                weapon: 'BAT',
+                donor: donor,
+                timestamp: Date.now()
+            });
         }
+
+        leaderboard[donor] = (leaderboard[donor] || 0) + likesReceived;
+        broadcast({ type: 'GIFT_RECEIVED', donor, giftName: 'Tap (Bateador)', team: donor, count: likesReceived });
+        broadcast({ type: 'LEADERBOARD_UPDATE', data: getSortedLeaderboard() });
+    });
+
+    // EVENTO ENTRADA DE ESPECTADOR: SPAWN AUTOMÁTICO DE PERSONAJE AL ENTRAR AL LIVE
+    tiktokLiveConnection.on('member', data => {
+        const donor = extractUsername(data);
+        console.log(`[ESPECTADOR ENTRÓ] ${donor} se unió a la transmisión -> Spawneando Bateador`);
+
+        pendingEvents.push({
+            team: donor,
+            unitType: 'brawler',
+            weapon: 'BAT',
+            donor: donor,
+            timestamp: Date.now()
+        });
+
+        leaderboard[donor] = (leaderboard[donor] || 0) + 1;
+        broadcast({ type: 'GIFT_RECEIVED', donor, giftName: 'Entrada al Live (Bateador)', team: donor, count: 1 });
+        broadcast({ type: 'LEADERBOARD_UPDATE', data: getSortedLeaderboard() });
     });
 
     tiktokLiveConnection.on('error', err => {
