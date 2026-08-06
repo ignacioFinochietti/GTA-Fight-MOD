@@ -17,7 +17,7 @@ let leaderboard = {};
 let maxPedsCap = 7;
 let wallsVisible = true;
 
-let TIKTOK_USERNAME = 'tu_usuario_tiktok';
+let TIKTOK_USERNAME = process.env.TIKTOK_USERNAME || 'ppv665';
 let isTikTokConnected = false;
 let tiktokLiveConnection = null;
 
